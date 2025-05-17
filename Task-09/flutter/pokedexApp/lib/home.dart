@@ -25,7 +25,7 @@ class _HomePageState extends State<HomePage> {
         backgroundColor: Color(0xFFB71C1C),
         elevation: 0,
         title: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween, // spread left and right
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Row(
               children: [
@@ -51,7 +51,6 @@ class _HomePageState extends State<HomePage> {
                 ),
               ],
             ),
-            // Show username at the right side
             Text(
               'Welcome User',
               style: TextStyle(
@@ -66,7 +65,6 @@ class _HomePageState extends State<HomePage> {
 
       body: Column(
         children: [
-          // Search bar
           Padding(
             padding: const EdgeInsets.all(16.0),
             child: TextField(
@@ -84,8 +82,6 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
           ),
-
-          // Type filter
           Container(
             height: 50,
             padding: EdgeInsets.symmetric(horizontal: 8),
@@ -117,8 +113,6 @@ class _HomePageState extends State<HomePage> {
               },
             ),
           ),
-
-          // Pokemon grid
           Expanded(
             child: GridView.builder(
               padding: EdgeInsets.all(16),
@@ -128,16 +122,15 @@ class _HomePageState extends State<HomePage> {
                 mainAxisSpacing: 16,
                 childAspectRatio: 0.75,
               ),
-              itemCount: 10, // Replace with actual data length
+              itemCount: 10, 
               itemBuilder: (context, index) {
-                // Get the right color based on Pokemon type
                 Color cardColor = _getPokemonTypeColor(index);
                 return GestureDetector(
                   onTap: () {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => PokemonDetailPage(), // Your detail page widget
+                            builder: (context) => PokemonDetailPage(),
                           ),
                         );
                   },
@@ -155,7 +148,6 @@ class _HomePageState extends State<HomePage> {
                     ),
                     child: Column(
                       children: [
-                        // Pokemon image with background
                         Container(
                           height: 120,
                           decoration: BoxDecoration(
@@ -177,8 +169,6 @@ class _HomePageState extends State<HomePage> {
                             ),
                           ),
                         ),
-
-                        // Pokemon info
                         Padding(
                           padding: const EdgeInsets.all(12.0),
                           child: Column(
@@ -252,26 +242,25 @@ class _HomePageState extends State<HomePage> {
             _selectedIndex = index;
           });
 
-          // Navigation based on index
           if (index == 0) {
             Navigator.pushReplacement(
               context,
-              MaterialPageRoute(builder: (context) => HomePage()), // your HomePage
+              MaterialPageRoute(builder: (context) => HomePage()), //HomePage
             );
           } else if (index == 1) {
             Navigator.pushReplacement(
               context,
-              MaterialPageRoute(builder: (context) => MyPokemon()), // your Pokemon page
+              MaterialPageRoute(builder: (context) => MyPokemon()), //Pokemon page
             );
           } else if (index == 2) {
             Navigator.pushReplacement(
               context,
-              MaterialPageRoute(builder: (context) => TradePage()), // your Trade page
+              MaterialPageRoute(builder: (context) => TradePage()), //Trade page
             );
           } else if (index == 3) {
             Navigator.pushReplacement(
               context,
-              MaterialPageRoute(builder: (context) => ProfilePage()), // your Profile page
+              MaterialPageRoute(builder: (context) => ProfilePage()), //Profile page
             );
           }
         },
@@ -297,8 +286,6 @@ class _HomePageState extends State<HomePage> {
       ),
     );
   }
-
-  // Helper methods to get Pokemon data
   String _getPokemonName(int index) {
     List<String> names = [
       'Pikachu', 'Charizard', 'Bulbasaur', 'Squirtle', 'Jigglypuff',

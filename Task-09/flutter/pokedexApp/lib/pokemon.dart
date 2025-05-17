@@ -49,7 +49,6 @@ class _PokemonCollectionPageState extends State<MyPokemon> {
       'captured': true,
       'image': 'eevee.png',
     },
-    // Add more Pokémon as needed
   ];
 
   String _searchQuery = '';
@@ -92,7 +91,7 @@ class _PokemonCollectionPageState extends State<MyPokemon> {
             const SizedBox(width: 10),
             Image.asset(
               'assets/pokedex_logo.png',
-              width: 120, // smaller size so it fits nicely
+              width: 120, 
               height: 50,
             ),
           ],
@@ -171,26 +170,25 @@ class _PokemonCollectionPageState extends State<MyPokemon> {
             _selectedIndex = index;
           });
 
-          // Navigation based on index
           if (index == 0) {
             Navigator.pushReplacement(
               context,
-              MaterialPageRoute(builder: (context) => HomePage()), // your HomePage
+              MaterialPageRoute(builder: (context) => HomePage()), 
             );
           } else if (index == 1) {
             Navigator.pushReplacement(
               context,
-              MaterialPageRoute(builder: (context) => MyPokemon()), // your Pokemon page
+              MaterialPageRoute(builder: (context) => MyPokemon()), 
             );
           } else if (index == 2) {
             Navigator.pushReplacement(
               context,
-              MaterialPageRoute(builder: (context) => TradePage()), // your Trade page
+              MaterialPageRoute(builder: (context) => TradePage()), 
             );
           } else if (index == 3) {
             Navigator.pushReplacement(
               context,
-              MaterialPageRoute(builder: (context) => ProfilePage()), // your Profile page
+              MaterialPageRoute(builder: (context) => ProfilePage()), 
             );
           }
         },
@@ -229,7 +227,6 @@ class _PokemonCollectionPageState extends State<MyPokemon> {
       ),
       child: InkWell(
         onTap: () {
-          // Navigate to Pokémon details page
         },
         child: Padding(
           padding: const EdgeInsets.all(8.0),

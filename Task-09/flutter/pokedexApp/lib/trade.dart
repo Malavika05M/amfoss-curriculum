@@ -33,7 +33,7 @@ class _TradePageState extends State<TradePage> {
             const SizedBox(width: 10),
             Image.asset(
               'assets/pokedex_logo.png',
-              width: 120, // smaller size so it fits nicely
+              width: 120, 
               height: 50,
             ),
           ],
@@ -44,7 +44,6 @@ class _TradePageState extends State<TradePage> {
         padding: const EdgeInsets.all(16.0),
         child: Column(
           children: [
-            // Trade Card Container
             Container(
               decoration: BoxDecoration(
                 color: Colors.white,
@@ -54,7 +53,6 @@ class _TradePageState extends State<TradePage> {
               padding: const EdgeInsets.all(16),
               child: Column(
                 children: [
-                  // Trade Header
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -85,7 +83,6 @@ class _TradePageState extends State<TradePage> {
                   ),
                   const SizedBox(height: 16),
 
-                  // Pokemon Images
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
@@ -157,26 +154,25 @@ class _TradePageState extends State<TradePage> {
             _selectedIndex = index;
           });
 
-          // Navigation based on index
           if (index == 0) {
             Navigator.pushReplacement(
               context,
-              MaterialPageRoute(builder: (context) => HomePage()), // your HomePage
+              MaterialPageRoute(builder: (context) => HomePage()), 
             );
           } else if (index == 1) {
             Navigator.pushReplacement(
               context,
-              MaterialPageRoute(builder: (context) => MyPokemon()), // your Pokemon page
+              MaterialPageRoute(builder: (context) => MyPokemon()), 
             );
           } else if (index == 2) {
             Navigator.pushReplacement(
               context,
-              MaterialPageRoute(builder: (context) => TradePage()), // your Trade page
+              MaterialPageRoute(builder: (context) => TradePage()), 
             );
           } else if (index == 3) {
             Navigator.pushReplacement(
               context,
-              MaterialPageRoute(builder: (context) => ProfilePage()), // your Profile page
+              MaterialPageRoute(builder: (context) => ProfilePage()), 
             );
           }
         },

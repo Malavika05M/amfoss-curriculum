@@ -3,6 +3,7 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:pokedexapp/register.dart';
 import 'package:pokedexapp/home.dart';
+import 'package:pokedexapp/api_service.dart';
 
 void main() {
   runApp(MyApp());
@@ -40,9 +41,15 @@ class _LoginScreenState extends State<LoginScreen> {
       _isLoading = true;
     });
 
-    final String username = _usernameController.text;
-    final String password = _passwordController.text;
-
+    final String username = _usernameController.text.trim();
+    final String password = _passwordController.text.trim();
+    if (username.isEmpty || password.isEmpty){
+      _showError('Please enter both username and password');
+      setState(() {
+        _isLoading = false;
+      });
+      return;
+    }
     try {
       final response = await http.post(
         Uri.parse('http://http://10.0.2.2:5001/login'),
@@ -54,7 +61,6 @@ class _LoginScreenState extends State<LoginScreen> {
         final data = jsonDecode(response.body);
 
         if (data['success']) {
-          // Navigate to HomePage if login is successful
           Navigator.pushReplacement(
             context,
             MaterialPageRoute(builder: (context) => HomePage()),
@@ -99,7 +105,6 @@ class _LoginScreenState extends State<LoginScreen> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              // Logo section with Flexible widgets to avoid overflow
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -136,6 +141,7 @@ class _LoginScreenState extends State<LoginScreen> {
               SizedBox(height: 60),
               // Email field
               TextField(
+                controller: _usernameController,
                 decoration: InputDecoration(
                   filled: true,
                   fillColor: Color(0xFFFFD800),
@@ -159,6 +165,7 @@ class _LoginScreenState extends State<LoginScreen> {
               SizedBox(height: 20),
               // Password field
               TextField(
+                controller: _passwordController,
                 obscureText: true,
                 decoration: InputDecoration(
                   filled: true,
@@ -184,12 +191,8 @@ class _LoginScreenState extends State<LoginScreen> {
               Container(
                 width: double.infinity,
                 child: ElevatedButton(
-                  onPressed: () {
-                    Navigator.pushReplacement(context,
-                      MaterialPageRoute(builder: (context) => HomePage()),
-                    );
-                  },
-                  child: Text(
+                  onPressed: _isLoading ? null : _login,
+                  child: _isLoading ? CircularProgressIndicator(color:Colors.white) : Text (
                     'LOGIN',
                     style: TextStyle(
                       fontWeight: FontWeight.bold,

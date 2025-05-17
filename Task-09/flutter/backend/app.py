@@ -10,14 +10,12 @@ app = Flask(__name__)
 CORS(app)
 bcrypt = Bcrypt(app)
 
-# MySQL Configuration
-app.config['MYSQL_HOST'] = '127.0.0.1'  # or 'localhost'
+app.config['MYSQL_HOST'] = '127.0.0.1'
 app.config['MYSQL_PORT'] = 3306
 app.config['MYSQL_USER'] = 'root'
-app.config['MYSQL_PASSWORD'] = ''  # (empty string since you didn't set password)
-app.config['MYSQL_DB'] = 'pokedex'  # Your database name
+app.config['MYSQL_PASSWORD'] = '' 
+app.config['MYSQL_DB'] = 'pokedex'
 
-# Initialize MySQL
 mysql = MySQL(app)
 
 @app.route('/api/register', methods=['POST'])
@@ -33,17 +31,14 @@ def register_user():
     try:
         cursor = mysql.connection.cursor()
         
-        # Check if username exists
         cursor.execute("SELECT 1 FROM Pokedex WHERE username = %s", (username,))
         if cursor.fetchone():
             return jsonify({"success": False, "message": "Username already exists"}), 409
 
-        # Hash password and get random starter Pokémon
         hashed_password = bcrypt.generate_password_hash(password).decode('utf-8')
         starter_pokemon_id = random.randint(1, 151)
         pokemon_list = json.dumps([starter_pokemon_id])
 
-        # Insert new user
         cursor.execute(
             "INSERT INTO Pokedex (username, name, password, pokelist) VALUES (%s, %s, %s, %s)",
             (username, name, hashed_password, pokemon_list)
@@ -183,8 +178,6 @@ def remove_pokelist():
     
     try:
         cursor = mysql.connection.cursor()
-        
-        # First check if the user has this Pokémon
         cursor.execute(
             "SELECT pokelist FROM Pokedex WHERE username = %s AND JSON_CONTAINS(pokelist, %s)",
             (username, json.dumps(pokemonId))
@@ -192,7 +185,6 @@ def remove_pokelist():
         if not cursor.fetchone():
             return jsonify({"error": "Pokemon not found for this user"}), 404
         
-        # Remove the Pokémon
         cursor.execute(
             "UPDATE Pokedex SET pokelist = JSON_REMOVE(pokelist, JSON_UNQUOTE(JSON_SEARCH(pokelist, 'one', %s)) WHERE username = %s",
             (pokemonId, username)
@@ -242,8 +234,6 @@ def trade_pokemon():
     
     try:
         cursor = mysql.connection.cursor()
-        
-        # Verify sender has the Pokémon
         cursor.execute(
             "SELECT pokelist FROM Pokedex WHERE username = %s AND JSON_CONTAINS(pokelist, %s)",
             (username, json.dumps(pokemon))
@@ -251,22 +241,16 @@ def trade_pokemon():
         sender_data = cursor.fetchone()
         if not sender_data:
             return jsonify({"error": "Pokemon not found in sender's list"}), 404
-        
-        # Verify receiver exists
         cursor.execute(
             "SELECT 1 FROM Pokedex WHERE username = %s",
             (receiver,)
         )
         if not cursor.fetchone():
             return jsonify({"error": "Receiver not found"}), 404
-        
-        # Remove from sender
         cursor.execute(
             "UPDATE Pokedex SET pokelist = JSON_REMOVE(pokelist, JSON_UNQUOTE(JSON_SEARCH(pokelist, 'one', %s))) WHERE username = %s",
             (pokemon, username)
         )
-        
-        # Add to receiver
         cursor.execute(
             "UPDATE Pokedex SET pokelist = CASE "
             "WHEN pokelist IS NULL THEN JSON_ARRAY(%s) "

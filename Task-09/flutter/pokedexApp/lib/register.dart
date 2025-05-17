@@ -170,8 +170,8 @@ class RegisterScreen extends StatelessWidget {
                     Text('Already a Trainer? '),
                     GestureDetector(
                       onTap: () {
-                        Navigator.pop(context); // Navigate back to login
-                      },
+                        Navigator.pop(context); 
+                      }
                       child: Text(
                         'Login Here',
                         style: TextStyle(

@@ -20,7 +20,6 @@ class _ProfilePageState extends State<ProfilePage> {
       backgroundColor: Colors.black,
       body: CustomScrollView(
         slivers: [
-          // App Bar with Profile Header
           SliverAppBar(
             expandedHeight: 200.0,
             floating: false,
@@ -147,26 +146,25 @@ class _ProfilePageState extends State<ProfilePage> {
             _selectedIndex = index;
           });
 
-          // Navigation based on index
           if (index == 0) {
             Navigator.pushReplacement(
               context,
-              MaterialPageRoute(builder: (context) => HomePage()), // your HomePage
+              MaterialPageRoute(builder: (context) => HomePage()), 
             );
           } else if (index == 1) {
             Navigator.pushReplacement(
               context,
-              MaterialPageRoute(builder: (context) => MyPokemon()), // your Pokemon page
+              MaterialPageRoute(builder: (context) => MyPokemon()), 
             );
           } else if (index == 2) {
             Navigator.pushReplacement(
               context,
-              MaterialPageRoute(builder: (context) => TradePage()), // your Trade page
+              MaterialPageRoute(builder: (context) => TradePage()), 
             );
           } else if (index == 3) {
             Navigator.pushReplacement(
               context,
-              MaterialPageRoute(builder: (context) => ProfilePage()), // your Profile page
+              MaterialPageRoute(builder: (context) => ProfilePage()), 
             );
           }
         },

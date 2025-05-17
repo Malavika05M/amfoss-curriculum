@@ -107,26 +107,25 @@ class _PokemonDetailPageState extends State<PokemonDetailPage> {
             _selectedIndex = index;
           });
 
-          // Navigation based on index
           if (index == 0) {
             Navigator.pushReplacement(
               context,
-              MaterialPageRoute(builder: (context) => HomePage()), // your HomePage
+              MaterialPageRoute(builder: (context) => HomePage()), 
             );
           } else if (index == 1) {
             Navigator.pushReplacement(
               context,
-              MaterialPageRoute(builder: (context) => MyPokemon()), // your Pokemon page
+              MaterialPageRoute(builder: (context) => MyPokemon()), 
             );
           } else if (index == 2) {
             Navigator.pushReplacement(
               context,
-              MaterialPageRoute(builder: (context) => TradePage()), // your Trade page
+              MaterialPageRoute(builder: (context) => TradePage()), 
             );
           } else if (index == 3) {
             Navigator.pushReplacement(
               context,
-              MaterialPageRoute(builder: (context) => ProfilePage()), // your Profile page
+              MaterialPageRoute(builder: (context) => ProfilePage()), 
             );
           }
         },
@@ -169,7 +168,6 @@ class _PokemonDetailPageState extends State<PokemonDetailPage> {
       padding: EdgeInsets.all(24),
       child: Column(
         children: [
-          // Pokemon Image with background
           Container(
             width: 200,
             height: 200,
@@ -182,8 +180,6 @@ class _PokemonDetailPageState extends State<PokemonDetailPage> {
             ),
           ),
           SizedBox(height: 20),
-
-          // Pokemon ID and Name
           Text(
             '#$id',
             style: TextStyle(
@@ -202,8 +198,6 @@ class _PokemonDetailPageState extends State<PokemonDetailPage> {
             ),
           ),
           SizedBox(height: 16),
-
-          // Type chips
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: types.map((type) {
@@ -226,8 +220,6 @@ class _PokemonDetailPageState extends State<PokemonDetailPage> {
               );
             }).toList(),
           ),
-
-          // Basic info
           SizedBox(height: 24),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -449,4 +441,3 @@ class _PokemonDetailPageState extends State<PokemonDetailPage> {
     if (value < 130) return Colors.yellow;
     return Colors.green;
   }
-}
