@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="default_web_client_id" translatable="false">339181380657-fnlg9ui16fa5gbn1md56o8vgm4f7q1gj.apps.googleusercontent.com</string>
+    <string name="gcm_defaultSenderId" translatable="false">339181380657</string>
+    <string name="google_api_key" translatable="false">AIzaSyCJEu71S1ZQzNG1ankDOM0vTURF23iGZL0</string>
+    <string name="google_app_id" translatable="false">1:339181380657:android:dec09f67f630195e922110</string>
+    <string name="google_crash_reporting_api_key" translatable="false">AIzaSyCJEu71S1ZQzNG1ankDOM0vTURF23iGZL0</string>
+    <string name="google_storage_bucket" translatable="false">pokedex-c14f7.firebasestorage.app</string>
+    <string name="project_id" translatable="false">pokedex-c14f7</string>
+</resources>
